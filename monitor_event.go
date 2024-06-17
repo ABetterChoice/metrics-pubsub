@@ -62,7 +62,8 @@ func asyncLogMonitorEvent(ctx context.Context, metadata *metrics.Metadata,
 func logMonitorEventLoop() {
 	cacheData := make(map[string]*monitorEventInput)
 	defer func() {
-		recoverErr := recover() // 防止第三方实现的监控上报插件 panic
+		// Prevent third-party monitoring reporting plugins from panicking
+		recoverErr := recover()
 		if recoverErr != nil {
 			body := make([]byte, 1<<10)
 			runtime.Stack(body, false)
@@ -108,7 +109,7 @@ func logMonitorEventLoop() {
 	}
 }
 
-// logMonitorEventByProjectID 记录监控曝光
+// logMonitorEventByProjectID Record surveillance exposure
 func (c *client) logMonitorEventByProjectID(ctx context.Context, metadata *metrics.Metadata,
 	eventGroup *protoc_event_server.MonitorEventGroup, projectID string) error {
 	if metadata == nil || len(metadata.TableID) == 0 {

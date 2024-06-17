@@ -2,4 +2,4 @@
 
 ### overview
 
-gcp 生态下的监控上报组件实现
+Implementation of monitoring and reporting components in the gcp ecosystem

@@ -55,7 +55,8 @@ func asyncLogExposureByProjectID(ctx context.Context, metadata *metrics.Metadata
 func logExposureLoop() {
 	cacheData := make(map[string]*exposureInput)
 	defer func() {
-		recoverErr := recover() // 防止第三方实现的监控上报插件 panic
+		// Prevent third-party monitoring reporting plugins from panicking
+		recoverErr := recover()
 		if recoverErr != nil {
 			body := make([]byte, 1<<10)
 			runtime.Stack(body, false)
@@ -116,7 +117,7 @@ var (
 		}}
 )
 
-// logExposureByProjectID 记录实验曝光 projectID 为 gcp 上的 projectID
+// logExposureByProjectID Record the experimental exposure. projectID is the projectID on gcp
 func (c *client) logExposureByProjectID(ctx context.Context, metadata *metrics.Metadata,
 	exposureGroup *protoc_event_server.ExposureGroup, projectID string) error {
 	if metadata == nil || len(metadata.TableID) == 0 {
@@ -162,7 +163,7 @@ func (c *client) logExposureByProjectID(ctx context.Context, metadata *metrics.M
 	}
 	result = topic.Publish(ctx, &pubsub.Message{
 		// Attributes: map[string]string{
-		//	"pid": exposureGroup.Exposures[i].ProjectId, // projectID 缩写 pid，用于染色，预留
+		//	"pid": exposureGroup.Exposures[i].ProjectId, // projectID abbreviation pid, used for dyeing, reserved
 		// },
 		Data: data,
 	})
