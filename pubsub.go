@@ -164,7 +164,7 @@ var (
 var isSync = false
 
 // SetIsSync TODO
-func SetIsSync(b bool) { // 非并发安全
+func SetIsSync(b bool) {
 	isSync = b
 }
 
@@ -274,7 +274,7 @@ func topicConfig(ctx context.Context, topic *pubsub.Topic) (*pubsub.TopicConfig,
 	}
 	rwMutex.Lock()
 	defer rwMutex.Unlock()
-	localCfg, ok = topicConfigCache.Load(topic.String()) // 二次确认
+	localCfg, ok = topicConfigCache.Load(topic.String())
 	if ok {
 		cfg, isKind := localCfg.(*pubsub.TopicConfig)
 		if isKind {
