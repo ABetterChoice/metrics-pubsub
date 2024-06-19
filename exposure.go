@@ -3,6 +3,7 @@ package metrics
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"runtime"
 	"sync"
 	"time"
@@ -137,7 +138,7 @@ func (c *client) logExposureByProjectID(ctx context.Context, metadata *metrics.M
 	topic.PublishSettings.Timeout = publishTimeout
 	cfg, err := topicConfig(ctx, topic)
 	if err != nil {
-		return errors.Wrap(err, "topic config")
+		return errors.Wrap(err, fmt.Sprintf("[%s]topic config", topic.String()))
 	}
 	var result *pubsub.PublishResult
 	var data []byte
@@ -168,7 +169,7 @@ func (c *client) logExposureByProjectID(ctx context.Context, metadata *metrics.M
 	})
 	_, err = result.Get(ctx)
 	if err != nil {
-		return err
+		return errors.Wrap(err, fmt.Sprintf("[%s]publish", topic.String()))
 	}
 	return nil
 }

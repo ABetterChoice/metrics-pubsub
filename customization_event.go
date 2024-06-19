@@ -3,6 +3,7 @@ package metrics
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"runtime"
 	"sync"
 	"time"
@@ -129,7 +130,7 @@ func (c *client) logEventByProjectID(ctx context.Context, metadata *metrics.Meta
 	topic.PublishSettings.Timeout = publishTimeout
 	cfg, err := topicConfig(ctx, topic)
 	if err != nil {
-		return errors.Wrap(err, "topic config")
+		return errors.Wrap(err, fmt.Sprintf("[%s]topic config", topic.String()))
 	}
 	var data []byte
 	if cfg.SchemaSettings != nil {
@@ -157,7 +158,7 @@ func (c *client) logEventByProjectID(ctx context.Context, metadata *metrics.Meta
 	})
 	_, err = result.Get(ctx)
 	if err != nil {
-		return err
+		return errors.Wrap(err, fmt.Sprintf("[%s]publish", topic.String()))
 	}
 	return nil
 }
