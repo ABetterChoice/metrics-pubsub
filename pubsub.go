@@ -281,6 +281,9 @@ func topicConfig(ctx context.Context, topic *pubsub.Topic) (*pubsub.TopicConfig,
 			return cfg, nil
 		}
 	}
+	defer func(start time.Time) {
+		log.Infof("topicConfig cost=%s", time.Since(start))
+	}(time.Now())
 	cfg, err := topic.Config(ctx)
 	if err != nil {
 		return &cfg, err

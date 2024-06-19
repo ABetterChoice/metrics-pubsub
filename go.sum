@@ -12,8 +12,6 @@ cloud.google.com/go/longrunning v0.3.0 h1:NjljC+FYPV3uh5/OwWT6pVU+doBqMg2x/rZlE+
 cloud.google.com/go/pubsub v1.27.1 h1:q+J/Nfr6Qx4RQeu3rJcnN48SNC0qzlYzSeqkPq93VHs=
 cloud.google.com/go/pubsub v1.27.1/go.mod h1:hQN39ymbV9geqBnfQq6Xf63yNhUAhv9CZhzp5O6qsW0=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/abetterchoice/go-sdk v0.0.0-20240615080411-5a683560d68b h1:HZ0D1nZfmOfcyc8KJ3Id1jnyBr1nu+96M435qazIN00=
-github.com/abetterchoice/go-sdk v0.0.0-20240615080411-5a683560d68b/go.mod h1:1Gt4I1DFJWQ0bo/Z6LmE+1hJDGOFP1Z0ue2KGZpI6sY=
 github.com/abetterchoice/protoc_cache_server v0.0.0-20240614085611-56d4e2694faf h1:ybiWrFdMjUIxvzM0wlrKCJvHHQ7zodDD8+MlAvni5JA=
 github.com/abetterchoice/protoc_cache_server v0.0.0-20240614085611-56d4e2694faf/go.mod h1:b5fK70opi9WsCWInNhE2jdBXmsdlt6ITQ9euLw0EeZE=
 github.com/abetterchoice/protoc_event_server v0.0.0-20240614085823-cafaa745b226 h1:4+iY45UsXT11MSbBYfZ42bNS9rtoaOtIwCQ1c3OfEoQ=

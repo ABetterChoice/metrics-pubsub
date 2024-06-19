@@ -100,7 +100,7 @@ func logCustomizationEventLoop() {
 				}
 				err := Client.logEventByProjectID(context.TODO(), ei.metadata, ei.eventGroup, ei.projectID)
 				if err != nil {
-					log.Errorf("logMonitorEventByProjectID fail:%v", err)
+					log.Errorf("[ticker]logMonitorEventByProjectID fail:%v", err)
 				}
 				delete(cacheData, key)
 				customizationEventInputPool.Put(ei)

@@ -94,7 +94,7 @@ func logExposureLoop() {
 				}
 				err := Client.logExposureByProjectID(context.TODO(), ei.metadata, ei.exposureGroup, ei.projectID)
 				if err != nil {
-					log.Errorf("logExposure fail:%v", err)
+					log.Errorf("[ticker]logExposure fail:%v", err)
 				}
 				delete(cacheData, key)
 				exposureInputPool.Put(ei)
