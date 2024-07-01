@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	cloud.google.com/go/pubsub v1.27.1
-	github.com/abetterchoice/go-sdk v0.0.0-20240615080411-5a683560d68b
+	github.com/abetterchoice/go-sdk v0.1.6
 	github.com/abetterchoice/protoc_cache_server v0.0.0-20240614085611-56d4e2694faf
 	github.com/abetterchoice/protoc_event_server v0.0.0-20240614085823-cafaa745b226
 	github.com/golang/protobuf v1.5.2
@@ -18,11 +18,19 @@ require (
 	cloud.google.com/go/compute v1.13.0 // indirect
 	cloud.google.com/go/compute/metadata v0.2.1 // indirect
 	cloud.google.com/go/iam v0.8.0 // indirect
+	github.com/RoaringBitmap/roaring v1.2.1 // indirect
+	github.com/abetterchoice/hashutil v0.0.0-20240612073854-14a51781e8ad // indirect
+	github.com/abetterchoice/protoc_dmp_proxy_server v0.0.0-20240612072010-bb3459224bd0 // indirect
+	github.com/abetterchoice/tagutil v0.0.0-20240612073231-fb91e1f4711e // indirect
+	github.com/bits-and-blooms/bitset v1.2.0 // indirect
 	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
+	github.com/golang/mock v1.6.0 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.7.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.0 // indirect
+	github.com/mschoch/smat v0.2.0 // indirect
+	github.com/shopspring/decimal v1.3.1 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/net v0.8.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect

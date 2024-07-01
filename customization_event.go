@@ -3,6 +3,7 @@ package metrics
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"runtime"
 	"sync"
 	"time"
@@ -100,7 +101,7 @@ func logCustomizationEventLoop() {
 				}
 				err := Client.logEventByProjectID(context.TODO(), ei.metadata, ei.eventGroup, ei.projectID)
 				if err != nil {
-					log.Errorf("logMonitorEventByProjectID fail:%v", err)
+					log.Errorf("[ticker]logMonitorEventByProjectID fail:%v", err)
 				}
 				delete(cacheData, key)
 				customizationEventInputPool.Put(ei)
@@ -130,7 +131,7 @@ func (c *client) logEventByProjectID(ctx context.Context, metadata *metrics.Meta
 	topic.PublishSettings.Timeout = publishTimeout
 	cfg, err := topicConfig(ctx, topic)
 	if err != nil {
-		return errors.Wrap(err, "topic config")
+		return errors.Wrap(err, fmt.Sprintf("[%s]topic config", topic.String()))
 	}
 	var data []byte
 	if cfg.SchemaSettings != nil {
@@ -158,7 +159,7 @@ func (c *client) logEventByProjectID(ctx context.Context, metadata *metrics.Meta
 	})
 	_, err = result.Get(ctx)
 	if err != nil {
-		return err
+		return errors.Wrap(err, fmt.Sprintf("[%s]publish", topic.String()))
 	}
 	return nil
 }
