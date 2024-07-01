@@ -21,24 +21,24 @@ import (
 	"google.golang.org/api/option"
 )
 
-// PluginName pubsub 监控上报插件名
+// PluginName pubsub Monitoring reporting plug-in name
 const PluginName = "pubsub"
 
 const (
 	// ProjectIDKey TODO
-	ProjectIDKey = "projectID" // 项目 ID
+	ProjectIDKey = "projectID" // project ID
 	// TopicNameKey TODO
-	TopicNameKey = "topicName" // topic 主题名称
+	TopicNameKey = "topicName" // topic topic name
 	// CredentialsJSON TODO
-	CredentialsJSON = "credentialsJSON" // 鉴权 token，可选项，如果没有，则走 gcp 默认密钥管理
+	CredentialsJSON = "credentialsJSON" // Authentication token, optional. If not, GCP default key management will be used.
 )
 
-// Name 插件名
+// Name Plugin Name
 func (c *client) Name() string {
 	return PluginName
 }
 
-// InitMultiConfig 初始化 pubsub
+// InitMultiConfig Initializing pubsub
 func (c *client) InitMultiConfig(ctx context.Context, configs ...*protoc_cache_server.MetricsInitConfig) (err error) {
 	if len(configs) == 0 {
 		return errors.Errorf("configs is required")
@@ -96,7 +96,7 @@ func (c *client) InitMultiConfig(ctx context.Context, configs ...*protoc_cache_s
 	return err
 }
 
-// Init 初始化 pubsub
+// Init Initializing pubsub
 func (c *client) Init(ctx context.Context, config *protoc_cache_server.MetricsInitConfig) (err error) {
 	if config == nil {
 		return fmt.Errorf("[pubsub]config is required")
@@ -146,7 +146,7 @@ func (c *client) Init(ctx context.Context, config *protoc_cache_server.MetricsIn
 	return err
 }
 
-// Release 释放资源
+// Release Release resources
 func Release() error {
 	initOnce = sync.Once{}
 	if Client == nil || Client.c == nil {
@@ -164,7 +164,7 @@ var (
 var isSync = false
 
 // SetIsSync TODO
-func SetIsSync(b bool) { // 非并发安全
+func SetIsSync(b bool) {
 	isSync = b
 }
 
@@ -172,7 +172,7 @@ func init() {
 	metrics.RegisterClient(Client)
 }
 
-// client pubsub 上报实现
+// client pubsub Report implementation
 type client struct {
 	c  *pubsub.Client
 	cs map[string]*pubsub.Client
@@ -201,7 +201,7 @@ const (
 	maxTimeInterval = 3 * time.Second
 )
 
-// SendData 通用上报，预留，建议使用 logEvent TODO 走 logEvent
+// SendData General reporting, reserved, it is recommended to use logEvent TODO to go to logEvent
 func (c *client) SendData(ctx context.Context, metadata *metrics.Metadata, data [][]string) error {
 	if metadata == nil || len(metadata.TableID) == 0 {
 		log.Warnf("[pubsub]invalid tableID")
@@ -226,7 +226,7 @@ func (c *client) SendData(ctx context.Context, metadata *metrics.Metadata, data 
 		}
 		result := c.c.Topic(metadata.TableID).Publish(ctx, &pubsub.Message{
 			Attributes: map[string]string{
-				"ct": "json", // contentType 为 json，默认 pb
+				"ct": "json", // contentType is json, default is pb
 			},
 			Data: body,
 		})
@@ -274,7 +274,7 @@ func topicConfig(ctx context.Context, topic *pubsub.Topic) (*pubsub.TopicConfig,
 	}
 	rwMutex.Lock()
 	defer rwMutex.Unlock()
-	localCfg, ok = topicConfigCache.Load(topic.String()) // 二次确认
+	localCfg, ok = topicConfigCache.Load(topic.String())
 	if ok {
 		cfg, isKind := localCfg.(*pubsub.TopicConfig)
 		if isKind {

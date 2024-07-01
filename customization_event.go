@@ -63,7 +63,8 @@ func asyncLogCustomizationEvent(ctx context.Context, metadata *metrics.Metadata,
 func logCustomizationEventLoop() {
 	cacheData := make(map[string]*customizationEventInput)
 	defer func() {
-		recoverErr := recover() // 防止第三方实现的监控上报插件 panic
+		//Prevent third-party monitoring reporting plugins from panicking
+		recoverErr := recover()
 		if recoverErr != nil {
 			body := make([]byte, 1<<10)
 			runtime.Stack(body, false)
@@ -109,7 +110,7 @@ func logCustomizationEventLoop() {
 	}
 }
 
-// logEventByProjectID 记录事件曝光
+// logEventByProjectID Recording incident exposure
 func (c *client) logEventByProjectID(ctx context.Context, metadata *metrics.Metadata,
 	eventGroup *protoc_event_server.EventGroup, projectID string) error {
 	if metadata == nil || len(metadata.TableID) == 0 {
